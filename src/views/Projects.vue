@@ -1,6 +1,8 @@
 <template>
+  <div class='projects-page'>
 
-  <Drip :bgColors="bg" />
+    <Drip :bgColors="bg" />
+  </div>
 
 </template>
 
@@ -29,12 +31,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.projects {
-  position: absolute;
-  top: 0;
-  left: 0;
+.projects-page {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 </style>

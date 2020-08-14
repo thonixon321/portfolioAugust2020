@@ -6,14 +6,14 @@
       class='nav absolute top-0 left-0'
     >
 
-      <div
-        @click="homeRoute"
+      <router-link
+        to="/"
         class='nav__logo cursor-pointer text-gray-100'
       >
         Logo
         <span class="nav__logo--name">
           TomDesigns</span>
-      </div>
+      </router-link>
 
       <ul class='nav__items text-gray-800'>
 
@@ -33,7 +33,10 @@
 
       </ul>
     </nav>
-    <div class="home-page">
+    <div
+      class="home-page"
+      :class="{hide: hideHome}"
+    >
       <div class="hero-section text-white">
 
         <div class='heading text-huge font-bold'>
@@ -147,7 +150,7 @@
     </div>
     <transition
       v-on:enter="transitionNameEnter"
-      v-on:leave="leaveFirst"
+      v-on:leave="transitionNameLeave"
       v-bind:css="false"
       mode="out-in"
     >
@@ -178,6 +181,7 @@ export default {
       ticking: false,
       roadOne: false,
       roadTwo: false,
+      hideHome: false,
     };
   },
 
@@ -190,18 +194,15 @@ export default {
 
       if (toDepth[1] === "projects" || toDepth[1] === "about") {
         this.transitionNameEnter = this.enterFirst;
+        this.transitionNameLeave = this.leaveFirst;
       } else {
-        this.transitionNameEnter = this.leaveFirst;
+        this.transitionNameLeave = this.leaveFirstHome;
       }
     },
   },
 
   methods: {
     ...mapActions(["updateWindowDimensions"]),
-
-    homeRoute() {
-      this.$router.push({ name: "Home" });
-    },
 
     projectsRoute() {
       this.$router.push({ name: "Projects" });
@@ -215,21 +216,69 @@ export default {
       console.log(el);
       this.$anime({
         targets: "#first",
-        translateY: [-1600, 0],
-        easing: "easeOutExpo",
-        opacity: 1,
+        translateY: [-6600, 0],
+        easing: "easeInQuad",
         complete: done,
       });
+
+      setTimeout(() => {
+        this.hideHome = true;
+      }, 1000);
     },
 
     leaveFirst(el, done) {
       console.log(el);
       this.$anime({
         targets: "#first",
-        translateY: -1500,
-        easing: "easeOutExpo",
+        translateY: -4500,
+        easing: "easeInQuad",
         complete: done,
       });
+      this.$anime({
+        targets: ".half-bgs",
+        width: 0,
+        zIndex: -1,
+        easing: "easeOutExpo",
+      });
+      this.$anime({
+        targets: ".about-me-header",
+        translateX: -1000,
+        zIndex: -1,
+      });
+      this.$anime({
+        targets: ".about-me-subheader",
+        translateX: 2000,
+        zIndex: -1,
+      });
+      this.hideHome = false;
+    },
+
+    leaveFirstHome(el, done) {
+      console.log(el);
+      this.$anime({
+        targets: "#first",
+        translateY: -4500,
+        easing: "easeInQuad",
+        complete: done,
+      });
+      this.$anime({
+        targets: ".half-bgs",
+        width: 0,
+        zIndex: -1,
+        easing: "easeOutExpo",
+      });
+      this.$anime({
+        targets: ".about-me-header",
+        translateX: -1000,
+        zIndex: -1,
+      });
+      this.$anime({
+        targets: ".about-me-subheader",
+        translateX: 2000,
+        zIndex: -1,
+      });
+
+      this.hideHome = false;
     },
 
     requestTick: function () {
@@ -393,6 +442,10 @@ export default {
   height: 100%;
   background: #f4f5f7;
   position: relative;
+}
+.hide {
+  width: 0%;
+  height: 0%;
 }
 .home-page {
   position: absolute;
