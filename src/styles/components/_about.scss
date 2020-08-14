@@ -1,0 +1,82 @@
+.about-section {
+  width: 100%;
+  position: relative;
+  margin-top: -7rem;
+  z-index: 9;
+
+  .info-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+
+    .info-box {
+      width: 30%;
+      height: 32rem;
+      position: relative;
+      background-color: white;
+      border-radius: 20px;
+      margin-top: -9rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
+      padding: 6rem;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s;
+
+      &:hover {
+        color: white;
+      }
+
+      p {
+        z-index: 2;
+      }
+
+      .arrow-circle-bg {
+        position: absolute;
+        top: 5rem;
+        right: 6rem;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+
+        &--1 {
+          background-color: orange;
+        }
+        &--2 {
+          background-color: #41b883;
+        }
+        &--3 {
+          background-color: #304085;
+        }
+      }
+
+      .info-arrow {
+        position: absolute;
+        top: 5rem;
+        right: 6rem;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        z-index: 20;
+
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+
+      svg.arrow-narrow-up {
+        position: absolute;
+        top: 6.2rem;
+        right: 7.2rem;
+        z-index: 21;
+        transform: rotate(45deg) scale(1.35);
+      }
+
+      .text-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 88%;
+        height: 98%;
+      }
+    }
+  }
+}

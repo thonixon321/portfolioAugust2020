@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Alice&display=swap");
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.btn {
+  @apply px-6 py-4 rounded bg-teal-500 mt-12 text-white text-2xl font-bold cursor-pointer;
+}
